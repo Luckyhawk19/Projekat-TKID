@@ -2,6 +2,30 @@
 
 OPIS PROJEKTA
 
+Projekat se sastoji iz dva dela - kodera i dekodera.
+Oba programa su rađena u c++-u i rade po sledećem principu:
 
+1)Koder učitava poruku sa glavnog ulaza i svaki karakter koji je unet zasebno kriptuje u niz od 8 karaktera.
+To radi tako što karakteru koji kompjuter pamti kao ASCII vrednost doda vrednost 17 i stavi ga na bilo koje od poslednjih 7 mesta.
+Nakon toga, u pomenuti niz od 8 karaktera se stavlja karakter 'a' ispred kriptovanog karaktera.
+Na preostalih 6 mesta se izgenerišu nasumični karakteri koji nisu karakter 'a'.
+Za svaki od prethodno unetih karaktera imamo niz od 8 karaktera koji predstavlja kod koji spajamo u jedan veliki niz karaktera.
+Primer:
 
+Za uneti niz karaktera "ex", program ispisuje kod
+||mQ%avfFwaë~!Hd
+koji se sastoji iz dva dela: "||mQ%avf" i "Fwaë~!Hd".
+Iza karaktera 'a', u prvom delu se pojavljuje 'v', koji ima ASCII vrednost 'e'+17 = 118, a u drugom 'ë', koji ima ASCII vrednost 'x'+17 = 137.
+Ostali karakteri u kodu su nasumično generisani.
 
+2)Dekoder učitava poruku oblika koda koji nam koder ispisuje, u svakom osmokarakternom segmentu nalazi karakter 'a'.
+Potom dešifruje karakter iza 'a' tako što mu od ASCII vrednosti oduzima 17, i na kraju sintetiše sve u jednu dekodiranu poruku.
+Primer:
+
+Za uneti kod, tj. niz karaktera u prethodnom primeru
+||mQ%avfFwaë~!Hd
+koji se sastoji iz dva dela: "||mQ%avf" i "Fwaë~!Hd"
+dekoder nalazi karakter 'a' na 6. i 3. mestu respektivno.
+Na 7. mestu u prvom osmokarakternom segmentu nalazi karakter 'v', koji posle oduzimanja 17 daje 'e'.
+Na 4. mestu u drugom osmokarakternom segmentu nalazi karakter 'ë', koji posle oduzimanja 17 daje 'x'.
+Najzad, dekoder spaja sve tražene karaktere u niz, i ispisuje "ex".
